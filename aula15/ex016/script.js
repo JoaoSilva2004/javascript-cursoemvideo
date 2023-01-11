@@ -11,7 +11,7 @@ function contar() {
     let valorFim = parseInt(fim.value);
     let valorPasso = parseInt(passo.value);
 
-    let erro = false;
+    /*let erro = false;
     let mensagemErro = "";
 
     if (!valorInicio) {
@@ -24,21 +24,10 @@ function contar() {
         valorFim = 0;
     }
 
-    if (!valorPasso || valorPasso <= 0) {
+    if (!valorPasso || valorPasso == 0) {
        passo.value = 1;
        valorPasso = 1;
-    }
-
-    if (valorFim < valorInicio) {
-        mensagemErro += "O Fim não pode ser menor que o início.<br>";
-        erro = true;
-    }
-
-    if (erro == true) {
-        resultado.innerHTML = `${mensagemErro}<br>Por favor, confira os valores corretamente.`;
-        resultado.setAttribute("class", "resultado error");
-        return
-    }
+    }*/
 
     let message = "";
 
@@ -46,9 +35,21 @@ function contar() {
 
     resultado.innerHTML = "Contando:<br>";
 
-    for (let i = valorInicio; i <= valorFim; i += valorPasso) {
-        console.log(i);
-        message += ` ${i} ${righthand} `;
+    
+    if (valorFim < valorInicio && valorPasso < 0) {
+        for (let i = valorInicio; i <= valorFim; i -= valorPasso) {
+            console.log(i);
+            message += i + righthand;
+        }
+    } else if (valorFim > valorInicio && valorPasso > 0) {
+        for (let i = valorInicio; i <= valorFim; i += valorPasso) {
+            console.log(i);
+            message += ` ${i} ${righthand} `;
+        }
+    } else {
+        resultado.class = "resultado error";
+        resultado.innerHTML = `Por favor, confira os valores corretamente.`;
+        return;
     }
 
     resultado.innerHTML = `${message} ${finishflag}`;
